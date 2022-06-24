@@ -5,9 +5,11 @@ import {
   XAxis,
   YAxis,
 } from '../../utils/coordinate/rectCoor/type'
+import { ObjectOf } from '../../types/general'
 
 export type Tooltip = {
   trigger: string
+  borderColor?: string
 }
 
 export interface LineDefaultOption {
@@ -32,4 +34,5 @@ export interface SerieItem {
   }
   smooth?: boolean
   markLine?: MarkLine
+  areaStyle?: ObjectOf<any>
 }

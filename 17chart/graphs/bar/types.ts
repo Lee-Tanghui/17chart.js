@@ -21,6 +21,7 @@ export interface BarDefaultOption {
 export type Tooltip = {
   trigger: string
   className: string
+  borderColor?: string
   axisPointer: {
     type: string
     shadowStyle: {

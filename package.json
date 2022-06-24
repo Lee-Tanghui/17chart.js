@@ -1,7 +1,7 @@
 {
   "name": "17chart.js",
   "private": false,
-  "version": "beta-0.0.1",
+  "version": "0.0.1",
   "scripts": {
     "dev": "umi dev",
     "build:chart": "rollup --config rollup.config.js",

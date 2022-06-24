@@ -143,3 +143,10 @@ export const deepAssignSingle = (objTo: ObjectOf<any>, obj: ObjectOf<any>) => {
     }
   })
 }
+
+/**
+ * 数组去重
+ */
+export const getSetArray = (array: any[]) => {
+  return Array.from(new Set(array))
+}

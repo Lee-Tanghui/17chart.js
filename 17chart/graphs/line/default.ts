@@ -1,10 +1,12 @@
 import { LineDefaultOption, SerieItem } from './types'
 import { COLOR } from '../../utils/constants'
+import { ObjectOf } from '../../types/general'
 
 export const getDefaultOption = (): LineDefaultOption => {
   const defaultOption = {
     tooltip: {
       trigger: 'axis',
+      borderColor: '#fff',
     },
     legend: {
       show: true,
@@ -67,7 +69,10 @@ export const getDefaultOption = (): LineDefaultOption => {
   return defaultOption
 }
 
-export const getLineSerieItem = (smooth?: boolean): SerieItem => {
+export const getLineSerieItem = (
+  smooth?: boolean,
+  areaStyle?: ObjectOf<any>,
+): SerieItem => {
   const item: SerieItem = {
     name: '',
     type: 'line',
@@ -81,6 +86,9 @@ export const getLineSerieItem = (smooth?: boolean): SerieItem => {
 
   if (smooth) {
     item.smooth = true
+  }
+  if (areaStyle) {
+    item.areaStyle = areaStyle
   }
 
   return item

@@ -30,10 +30,10 @@ export const merge = (
 }
 
 const getSeries = (userOption: ObjectOf<any>) => {
-  const { data, yField, smooth } = userOption
+  const { data, yField, smooth, areaStyle } = userOption
 
   const _get = (data: any[]) => {
-    const item = getLineSerieItem(smooth)
+    const item = getLineSerieItem(smooth, areaStyle)
     item.data = data.map((i) => {
       return i[yField]
     })

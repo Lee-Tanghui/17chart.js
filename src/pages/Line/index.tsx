@@ -166,6 +166,24 @@ export default function LinePage() {
         end: 85,
       },
     })
+    // 10. 面积图
+    new $17chart.Line('chart10', {
+      renderer: 'svg',
+      data: data5,
+      xField: 'name',
+      yField: 'value',
+      grid: {
+        bottom: 60,
+      },
+      areaStyle: {},
+      isShowLabel: false,
+      yAxis: {
+        name: '参测人数',
+      },
+      xAxis: {
+        name: '学校名称',
+      },
+    })
   }, [])
 
   return (
@@ -205,6 +223,10 @@ export default function LinePage() {
       <section>
         <h1>9. 有DataZoom的情况</h1>
         <div id="chart9"></div>
+      </section>
+      <section>
+        <h1>10. 面积图</h1>
+        <div id="chart10"></div>
       </section>
     </div>
   )

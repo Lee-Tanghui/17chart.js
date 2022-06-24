@@ -156,6 +156,10 @@ export const getIsLegendShow = (userOption: any): boolean => {
     isShow = false
   }
 
+  if (get(userOption, 'groupField')) {
+    isShow = true
+  }
+
   return isShow
 }
 

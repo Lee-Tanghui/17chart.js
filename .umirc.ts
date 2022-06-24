@@ -12,6 +12,7 @@ export default defineConfig({
     { path: '/', name: 'REAME.md', component: '@/pages/Index/index' },
     { path: '/bar', name: '柱状图', component: '@/pages/Bar/index' },
     { path: '/line', name: '折线图', component: '@/pages/Line/index' },
+    { path: '/scatter', name: '散点图', component: '@/pages/Scatter/index' },
   ],
   fastRefresh: {},
   history: {

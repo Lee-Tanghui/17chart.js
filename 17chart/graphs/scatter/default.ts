@@ -1,20 +1,18 @@
-import { BarDefaultOption, SerieItem } from './types'
-import { COLOR, CLASS_NAME } from '../../utils/constants'
+import { COLOR } from '../../utils/constants'
+import { ObjectOf } from '../../types/general'
+import { ScatterSerieItem, ScatterDefaultOption } from './types'
 
-export const getDefaultOption = (): BarDefaultOption => {
-  const defaultOption: BarDefaultOption = {
+export const getDefaultOption = (): ScatterDefaultOption => {
+  const defaultOption: ScatterDefaultOption = {
     tooltip: {
       trigger: 'item',
-      className: CLASS_NAME.BAR_TOOLTIP,
-      borderColor: '#fff',
-      axisPointer: {
-        type: 'shadow',
-        shadowStyle: {
-          color: '#F3F5F9',
-          shadowBlur: 0.2,
-          opacity: 0.04,
-        },
+      formatter: (params: any) => {
+        const { marker, name, value, dimensionNames } = params
+        return `${name}${name ? '<br>' : ''}
+        ${marker}${dimensionNames[0]}:${value[0]},
+        ${dimensionNames[1]}:${value[1]}`
       },
+      borderColor: '#fff',
     },
     legend: {
       show: true,
@@ -22,7 +20,7 @@ export const getDefaultOption = (): BarDefaultOption => {
       itemWidth: 8,
       itemHeight: 8,
       itemGap: 16,
-      icon: 'rect',
+      icon: 'circle',
     },
     color: COLOR.THEME_PRIMARY_COLORS,
     grid: {
@@ -33,8 +31,6 @@ export const getDefaultOption = (): BarDefaultOption => {
       containLabel: true,
     },
     xAxis: {
-      type: 'category',
-      data: [],
       axisTick: {
         show: false,
       },
@@ -57,7 +53,6 @@ export const getDefaultOption = (): BarDefaultOption => {
     },
     yAxis: {
       name: '',
-      type: 'value',
       nameTextStyle: {
         align: 'right',
         color: '#999',
@@ -77,19 +72,17 @@ export const getDefaultOption = (): BarDefaultOption => {
   return defaultOption
 }
 
-export const getBarSerieItem = (): SerieItem => {
-  return {
+export const getScatterSerieItem = (): ScatterSerieItem => {
+  const item: ScatterSerieItem = {
     name: '',
-    type: 'bar',
-    barMaxWidth: 72,
-    barMinWidth: 16,
-    barGap: '30%',
-    barCategoryGap: '50%',
+    type: 'scatter',
     data: [],
     label: {
-      show: true,
+      show: false,
       color: '#666',
       position: 'top',
     },
   }
+
+  return item
 }
