@@ -2,6 +2,7 @@ import json from 'rollup-plugin-json'
 import typescript from '@rollup/plugin-typescript'
 import less from 'rollup-plugin-less'
 import { terser } from 'rollup-plugin-terser'
+import babel from 'rollup-plugin-babel'
 
 export default [
   // umd
@@ -24,6 +25,9 @@ export default [
       less({
         output: `lib/umd/17chart.css`,
       }),
+      babel({
+        exclude: 'node_modules/**',
+      }),
     ],
   },
   // esm
@@ -45,6 +49,9 @@ export default [
       less({
         output: `lib/esm/17chart.css`,
       }),
+      babel({
+        exclude: 'node_modules/**',
+      }),
     ],
   },
   // cjs
@@ -65,6 +72,9 @@ export default [
       typescript({ sourceMap: false }),
       less({
         output: `lib/cjs/17chart.css`,
+      }),
+      babel({
+        exclude: 'node_modules/**',
       }),
     ],
   },
