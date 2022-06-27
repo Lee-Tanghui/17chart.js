@@ -9,7 +9,10 @@ import { ScatterDataItem } from './types'
  * @param defaultOption
  * @param userOption
  */
-export const merge = (defaultOption, userOption: ObjectOf<any>) => {
+export const merge = (
+  defaultOption: ObjectOf<any>,
+  userOption: ObjectOf<any>,
+) => {
   const isExchangeAxis = getIsExchangeAxis(userOption)
 
   if (isExchangeAxis) {
