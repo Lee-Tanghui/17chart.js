@@ -25,21 +25,8 @@ export default abstract class Graph {
         ? (document.getElementById(container) as HTMLElement)
         : (container as HTMLElement)
 
-    // 【参数错误检测】：传递的id，但是没有获取到元素
-    if (typeof container === 'string' && !this.container) {
-      console.error(`Invalid id: Can't get the dom that id is ${container}`)
-      return
-    }
-    // 【参数错误检测】：传递的不是id，但是不是一个DOM节点
-    if (typeof container !== 'string' && this.container.nodeType !== 1) {
-      console.error('Invalid Type: container is not a dom element')
-      return
-    }
-    // 【参数错误检测】：optionss不是一个数组
-    if (!checkIsValidData(get(options, 'data'))) {
-      console.error('Invalid Type: options.data should be type of Array')
-      return
-    }
+    // 参数检测
+    this._validate(container, options)
 
     // 设置标识
     this.container.setAttribute('chart-source', CHART_SOURCE)
@@ -67,9 +54,8 @@ export default abstract class Graph {
         this.container.offsetHeight <= 360
       ) {
         const extraHeight = height - HEIGHT.MAX_BOTTOM_HEIGHT_TOLERANCE_VALUE
-        this.container.style.height = `${
-          this.container.offsetHeight + extraHeight
-        }px`
+        this.container.style.height = `${this.container.offsetHeight +
+          extraHeight}px`
       }
     }
 
@@ -82,7 +68,7 @@ export default abstract class Graph {
 
     this._registerEvent()
 
-    new Promise<void>((resolve) => {
+    new Promise<void>(resolve => {
       resolve()
     }).then(() => {
       this.render()
@@ -102,8 +88,34 @@ export default abstract class Graph {
     this._observeReisze()
   }
 
+  private _validate(container: string | HTMLElement, options: ObjectOf<any>) {
+    // 【参数检测错误】： container存在
+    if (!container) {
+      throw TypeError('argument of container is required')
+    }
+    // 【参数错误检测】： 我是否
+    if (!options) {
+      throw TypeError('argument of option is required')
+    }
+    // 【参数错误检测】：传递的id，但是没有获取到元素
+    if (typeof container === 'string' && !this.container) {
+      console.error(`Invalid id: Can't get the dom that id is ${container}`)
+      return
+    }
+    // 【参数错误检测】：传递的不是id，但是不是一个DOM节点
+    if (typeof container !== 'string' && this.container.nodeType !== 1) {
+      console.error('Invalid Type: container is not a dom element')
+      return
+    }
+    // 【参数错误检测】：optionss不是一个数组
+    if (!checkIsValidData(get(options, 'data'))) {
+      console.error('Invalid Type: options.data should be type of Array')
+      return
+    }
+  }
+
   private _observeReisze() {
-    const resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver(entries => {
       this._resize()
     })
     if (this.container.parentElement) {

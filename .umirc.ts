@@ -13,6 +13,7 @@ export default defineConfig({
     { path: '/bar', name: '柱状图', component: '@/pages/Bar/index' },
     { path: '/line', name: '折线图', component: '@/pages/Line/index' },
     { path: '/scatter', name: '散点图', component: '@/pages/Scatter/index' },
+    { path: '/pie', name: '饼图', component: '@/pages/Pie/index' },
   ],
   fastRefresh: {},
   history: {
