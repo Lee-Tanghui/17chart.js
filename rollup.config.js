@@ -1,26 +1,71 @@
 import json from 'rollup-plugin-json'
 import typescript from '@rollup/plugin-typescript'
 import less from 'rollup-plugin-less'
+import { terser } from 'rollup-plugin-terser'
 
 export default [
+  // umd
   {
     input: '17chart/index.ts',
     external: ['echarts'],
     output: {
       sourcemap: false,
       name: '$17chart',
-      file: 'lib/17chart.js',
+      file: `lib/umd/17chart.min.js`,
       format: 'umd',
       globals: {
         echarts: 'echarts',
       },
     },
     plugins: [
-      less({
-        output: 'lib/17chart.css',
-      }),
       json(),
       typescript({ sourceMap: false }),
+      terser(),
+      less({
+        output: `lib/umd/17chart.css`,
+      }),
+    ],
+  },
+  // esm
+  {
+    input: '17chart/index.ts',
+    external: ['echarts'],
+    output: {
+      sourcemap: false,
+      name: '$17chart',
+      file: `lib/esm/17chart.esm.js`,
+      format: 'es',
+      globals: {
+        echarts: 'echarts',
+      },
+    },
+    plugins: [
+      json(),
+      typescript({ sourceMap: false }),
+      less({
+        output: `lib/esm/17chart.css`,
+      }),
+    ],
+  },
+  // cjs
+  {
+    input: '17chart/index.ts',
+    external: ['echarts'],
+    output: {
+      sourcemap: false,
+      name: '$17chart',
+      file: `lib/cjs/17chart.common.js`,
+      format: 'cjs',
+      globals: {
+        echarts: 'echarts',
+      },
+    },
+    plugins: [
+      json(),
+      typescript({ sourceMap: false }),
+      less({
+        output: `lib/cjs/17chart.css`,
+      }),
     ],
   },
 ]

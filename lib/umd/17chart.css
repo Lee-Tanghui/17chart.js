@@ -1,0 +1,10 @@
+.yq_chart_tooltip--bar {
+  border: none !important;
+}
+.yq_chart_tooltip--bar div > span:first-child {
+  position: relative;
+  top: -1px;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 0 !important;
+}
