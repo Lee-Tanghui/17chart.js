@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["17chart/**/*"],
+  "exclude": [
+    "node_modules",
+    "es",
+    "dist",
+    "typings",
+    "**/__test__",
+    "test",
+    "docs",
+    "tests"
+  ]
+}
