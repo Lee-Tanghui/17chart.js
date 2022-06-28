@@ -1,7 +1,7 @@
 {
   "name": "17chart.js",
   "private": false,
-  "version": "0.0.6-aplha",
+  "version": "0.0.7-aplha",
   "keywords": [
     "echarts",
     "chart",
@@ -17,7 +17,7 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage",
-    "prepublishOnly": "build:chart"
+    "prepublishOnly": "npm run build:chart"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
