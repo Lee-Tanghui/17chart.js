@@ -21,11 +21,19 @@ export default [
       json(),
       typescript({ sourceMap: false }),
       terser(),
-      less({
-        output: `lib/17chart.css`,
-      }),
       babel({
         exclude: 'node_modules/**',
+      }),
+    ],
+  },
+  {
+    input: '17chart/styles/index.less',
+    output: {
+      file: 'lib/17chart.css',
+    },
+    plugins: [
+      less({
+        output: `lib/17chart.css`,
       }),
     ],
   },
