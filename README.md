@@ -1,7 +1,5 @@
 # 17chart.js
 
-> 开发图表示例网站：[http://17chart-dev-website-1258339218.cos-website.ap-beijing.myqcloud.com/](http://17chart-dev-website-1258339218.cos-website.ap-beijing.myqcloud.com/)
-
 ## 什么是17chart？
 
 `17chart.js`是基于Echart.js二次封装的一个图表库，目的在于：
@@ -10,7 +8,7 @@
 - 简化Echarts配置项的复杂度（一段即使上百行的`option`代码，大部分都是服务于UI样式和组件）
 - 对Echarts.js无需考虑的一些图表业务细节进行处理
 
-
+> 开发图表示例网站：[http://17chart-dev-website-1258339218.cos-website.ap-beijing.myqcloud.com/](http://17chart-dev-website-1258339218.cos-website.ap-beijing.myqcloud.com/)
 
 ## 什么是图表业务细节？
 
