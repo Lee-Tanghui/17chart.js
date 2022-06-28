@@ -1,4 +1,4 @@
-import { BarDefaultOption } from './types'
+import { BarDefaultOption, UserOption } from './types'
 import { ObjectOf } from '../../types/general'
 import { is2Array, isArray } from '../../utils/tools'
 import { getBarSerieItem } from './default'
@@ -14,7 +14,7 @@ import {
  */
 export const merge = (
   defaultOption: BarDefaultOption,
-  userOption: ObjectOf<any>,
+  userOption: UserOption,
 ) => {
   const isExchangeAxis = getIsExchangeAxis(userOption)
   // 挂载xAxis或yAxis的数据

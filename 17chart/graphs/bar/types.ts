@@ -3,6 +3,7 @@ import {
   DataZoom,
   XAxis,
   YAxis,
+  MarkLineDataItem,
 } from '../../utils/coordinate/rectCoor/type'
 import { ObjectOf } from '../../types/general'
 import { Grid, Legend } from '../../types/option'
@@ -47,4 +48,48 @@ export interface SerieItem {
     position: string
   }
   markLine?: MarkLine
+}
+
+export interface UserOption {
+  // 字段名
+  xField: string
+  yField: string
+  data: any[]
+  renderer?: string
+  name?: string | string[]
+  isStack?: boolean
+  color?: string | string[]
+  labelColor?: string | string[]
+  grid?: {
+    top?: number
+    bottom?: number
+    left?: number
+    right?: number
+  }
+  legend?: {
+    show?: boolean
+  }
+  isShowLabel?: boolean
+  isPercent?: boolean
+  percentFixed?: number
+  xAxis?: {
+    type?: string
+    name?: string
+    axisLabel?: {
+      rotate: number
+    }
+  }
+  yAxis?: {
+    type?: string
+    name?: string
+    minInterval?: number
+  }
+  dataZoom?: {
+    brushSelect?: boolean
+    start?: number
+    end?: number
+  }
+  markLine?: {
+    data?: MarkLineDataItem[]
+  }
 }

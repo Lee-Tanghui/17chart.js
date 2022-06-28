@@ -1,6 +1,7 @@
 import Graph from '../../core/graphs'
 
 import { ObjectOf } from '../../types/general'
+import { UserOption } from './types'
 import { GRAPH_TYPES } from '../../utils/types'
 import { handler as rectCoorHandler } from '../../utils/coordinate/rectCoor/handler'
 import { handler } from '../../utils/option'
@@ -14,7 +15,7 @@ export default class Bar extends Graph {
   /**图表类型 */
   type: string
 
-  constructor(container: string, userOption: object) {
+  constructor(container: string, userOption: UserOption) {
     super(container, userOption)
 
     this.type = GRAPH_TYPES.BAR

@@ -63,7 +63,7 @@ export default function LinePage() {
     // 5. 有name的情况
     new $17chart.Line('chart5', {
       renderer: 'svg',
-      name: '今日数码产品售卖情况',
+      name: '参测情况',
       data: data1,
       xField: 'name',
       yField: 'value',

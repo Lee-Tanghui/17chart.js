@@ -1,6 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import $17chart from '../../../17chart/index'
 import { data1, data2, data3, data4, data5, data6, data7 } from './mock/data'
+import { Affix, Button } from 'antd'
+import ConfigPanel from '../../components/configPanel'
+import json from './config'
 
 export default function BarPage() {
   useEffect(() => {
@@ -50,7 +53,7 @@ export default function BarPage() {
       data: data1,
       xField: 'name',
       yField: 'value',
-      name: '今日数码产品售卖情况',
+      name: '参测情况',
       xAxis: {
         name: '学科',
       },
@@ -67,7 +70,7 @@ export default function BarPage() {
     //     { xField: 'name', yFild: 'value', data: data1, name: '数量' },
     //     { xField: 'name', yFild: 'value', data: data3, name: '占比情况' },
     //   ],
-    //   name: '今日数码产品售卖情况',
+    //   name: '参测情况',
     //   xAxis: {
     //     name: '学科',
     //   },
@@ -202,7 +205,7 @@ export default function BarPage() {
       xField: 'name',
       yField: 'value',
       isShowLabel: false,
-      name: '今日数码产品售卖情况',
+      name: '参测情况',
       xAxis: {
         name: '学科',
       },
@@ -232,7 +235,6 @@ export default function BarPage() {
 
     // 14. 堆叠柱状图（程度递进：优秀、良好、一般、不及格）
     const chart14 = new $17chart.Bar('chart14', {
-      id: 'chart14',
       renderer: 'svg',
       data: data7,
       xField: 'name',
@@ -294,8 +296,25 @@ export default function BarPage() {
     })
   }, [])
 
+  const [visible, setVisible] = useState(false)
+  const onButtonClick = () => {
+    setVisible(true)
+  }
+
   return (
     <div>
+      <Affix offsetTop={60} style={{ position: 'absolute', right: 20 }}>
+        <Button type="primary" onClick={onButtonClick}>
+          配置项
+        </Button>
+      </Affix>
+      <ConfigPanel
+        json={json}
+        title="柱状图配置项"
+        visible={visible}
+        onVisibleChange={setVisible}
+      ></ConfigPanel>
+      {/* 图表部分 */}
       <section>
         <h1>1. 普通柱状图</h1>
         <div id="chart1"></div>
