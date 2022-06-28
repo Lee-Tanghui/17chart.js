@@ -1,10 +1,22 @@
 import json from 'rollup-plugin-json'
 import typescript from '@rollup/plugin-typescript'
-import less from 'rollup-plugin-less'
+import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 import babel from 'rollup-plugin-babel'
 
 export default [
+  {
+    input: '17chart/styles/index.less',
+    output: {
+      file: 'lib/17chart.css',
+    },
+    plugins: [
+      postcss({
+        extract: true,
+        use: ['less'],
+      }),
+    ],
+  },
   {
     input: '17chart/index.ts',
     external: ['echarts'],
@@ -23,17 +35,6 @@ export default [
       terser(),
       babel({
         exclude: 'node_modules/**',
-      }),
-    ],
-  },
-  {
-    input: '17chart/styles/index.less',
-    output: {
-      file: 'lib/17chart.css',
-    },
-    plugins: [
-      less({
-        output: `lib/17chart.css`,
       }),
     ],
   },
