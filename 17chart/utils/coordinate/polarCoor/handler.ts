@@ -33,7 +33,6 @@ export const handler = (
       ((dataLength * LENGEND_HEIGHT) / offsetHeight / 2) * 100
     set(copyUserOption, 'legend.top', `${50 - percentPerLengend}%`)
   }
-  console.log(copyUserOption)
   // merge数据
   deepAssign(defaultOption, copyUserOption)
 }

@@ -38,6 +38,16 @@ export default function PiePage() {
       nameField: 'type',
       valueField: 'count',
     })
+    // 6. 排序（从大到下，降序排列）
+    new $17chart.Pie('chart6', {
+      data: data1,
+      sort: 'descending',
+    })
+    // 7. 排序（从小到大，升序排列）
+    new $17chart.Pie('chart7', {
+      data: data1,
+      sort: 'ascending',
+    })
   })
 
   return (
@@ -61,6 +71,14 @@ export default function PiePage() {
       <section>
         <h1>5. 自定义字段</h1>
         <div id="chart5"></div>
+      </section>
+      <section>
+        <h1>6. 排序（从大到小:descending）</h1>
+        <div id="chart6"></div>
+      </section>
+      <section>
+        <h1>7. 排序（从小到大:ascending）</h1>
+        <div id="chart7"></div>
       </section>
     </div>
   )
