@@ -41,7 +41,7 @@ export const getPieSerieItem = (userOption: ObjectOf<any>) => {
   }
 
   if (!get(userOption, 'pie.label.formatter')) {
-    pieItem.label.rich = {
+    ;(pieItem.label as any).rich = {
       name: {
         color: '#A1A3B4',
       },
