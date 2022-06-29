@@ -2,6 +2,7 @@
 export const COLOR = {
   FONT_COLOR: '#666', // 文字颜色
   AXIS_LINE_COLOR: '#eee', // x轴和y轴的线条颜色
+  // 主体颜色
   THEME_PRIMARY_COLORS: [
     '#5B8FF9',
     '#61DDAA',
@@ -13,6 +14,18 @@ export const COLOR = {
     '#F6903D',
     '#008685',
     '#F08BB4',
+  ],
+  // 极坐标主体颜色
+  THEME_PIE_COLORS: [
+    '#5B8FF9',
+    '#5AD8A6',
+    '#748AB1',
+    '#F7C739',
+    '#EB7E65',
+    '#78D3F8',
+    '#B46CE0',
+    '#F6903D',
+    '#FFA8CC',
   ],
 }
 

@@ -47,7 +47,7 @@ export const handler = (
     }
   }
 
-  // Merge数据(需要删除data、xField、yField三个字段)
+  // 删除非echarts的options字段
   const copyUserOption = deepAssign({}, userOption)
   Reflect.deleteProperty(copyUserOption, 'data')
   Reflect.deleteProperty(copyUserOption, 'xField')

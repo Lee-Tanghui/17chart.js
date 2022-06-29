@@ -7,7 +7,7 @@
 
 - `rectCoor/*.ts`: 直角坐标系的处理库
 
-- `polar/*.ts`: 极坐标系的处理库
+- `polarCoor/*.ts`: 极坐标系的处理库
 
 
 
