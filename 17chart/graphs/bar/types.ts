@@ -50,6 +50,11 @@ export interface SerieItem {
   markLine?: MarkLine
 }
 
+export interface CustomLegend {
+  name: string
+  color: string
+}
+
 export interface UserOption {
   // 字段名
   xField: string
@@ -68,6 +73,7 @@ export interface UserOption {
   }
   legend?: {
     show?: boolean
+    custom?: any[]
   }
   isShowLabel?: boolean
   isPercent?: boolean
@@ -78,11 +84,13 @@ export interface UserOption {
     axisLabel?: {
       rotate: number
     }
+    interval?: number
   }
   yAxis?: {
     type?: string
     name?: string
     minInterval?: number
+    inverse?: boolean
   }
   dataZoom?: {
     brushSelect?: boolean
@@ -91,5 +99,9 @@ export interface UserOption {
   }
   markLine?: {
     data?: MarkLineDataItem[]
+  }
+  bar?: {
+    colorBy?: string
+    colorCategory?: string
   }
 }

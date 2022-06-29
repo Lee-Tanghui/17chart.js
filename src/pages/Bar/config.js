@@ -25,6 +25,11 @@ export default {
     type: 'value',
     name: '参测人数',
     minInterval: 1,
+    inverse: true, // 默认false
+  },
+  bar: {
+    colorBy: 'data',
+    colorCategory: 'inherit', // inherit 或者 loop
   },
   dataZoom: {
     brushSelect: false,

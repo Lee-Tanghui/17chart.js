@@ -21,7 +21,7 @@ export default class Bar extends Graph {
     this.type = GRAPH_TYPES.BAR
     const defaultOption = getDefaultOption()
     // 柱状图自定义merge
-    merge(defaultOption, userOption)
+    merge(defaultOption, userOption, this)
     // 直角坐标系处理
     rectCoorHandler(defaultOption, userOption)
     // 统一处理

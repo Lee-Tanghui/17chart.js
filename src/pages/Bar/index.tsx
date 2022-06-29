@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react'
 import $17chart from '../../../17chart/index'
-import { data1, data2, data3, data4, data5, data6, data7 } from './mock/data'
+import {
+  data1,
+  data2,
+  data3,
+  data4,
+  data5,
+  data6,
+  data7,
+  data9,
+} from './mock/data'
 import { Affix, Button } from 'antd'
 import ConfigPanel from '../../components/configPanel'
 import json from './config'
@@ -294,6 +303,50 @@ export default function BarPage() {
         name: '参测占比',
       },
     })
+
+    // 17. X、Y轴翻转（自定义颜色）
+    new $17chart.Bar('chart17', {
+      xField: 'value',
+      yField: 'type',
+      data: data9.flat(Infinity),
+      color: ['#5AD8A6', '#748AB1', '#F7C739', '#EB7E65', '#5B8FF9'],
+      bar: {
+        colorBy: 'data',
+        colorCategory: 'inherit', // inherit 或者 loop
+      },
+      yAxis: {
+        type: 'category',
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value',
+        interval: 1,
+      },
+    })
+    // 18. X、Y轴翻转（自定义图例）
+    const { option } = new $17chart.Bar('chart18', {
+      xField: 'value',
+      yField: 'type',
+      data: data9.flat(Infinity),
+      legend: {
+        // 注意添加了legend.custom后，不再允许增加color和bar.colorCategory
+        custom: [
+          { name: '全区', color: '#5AD8A6' },
+          { name: '公办', color: '#748AB1' },
+          { name: '民办', color: '#F7C739' },
+          { name: '随迁', color: '#EB7E65' },
+          { name: '各学校', color: '#5B8FF9' },
+        ],
+      },
+      yAxis: {
+        type: 'category', // 增加这个参数
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value', // 增加这个参数
+        interval: 1,
+      },
+    })
   }, [])
 
   const [visible, setVisible] = useState(false)
@@ -378,6 +431,17 @@ export default function BarPage() {
       <section>
         <h1>16. X、Y轴翻转，并且是百分比的情况</h1>
         <div id="chart16"></div>
+      </section>
+      <section>
+        <h1>17. X、Y轴翻转 + 自定义颜色</h1>
+        <div id="chart17"></div>
+      </section>
+      <section>
+        <h1>18. X、Y轴翻 + 自定义图例</h1>
+        <p>
+          ⚠️注意：自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准
+        </p>
+        <div id="chart18"></div>
       </section>
     </div>
   )

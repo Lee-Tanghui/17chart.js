@@ -150,3 +150,10 @@ export const deepAssignSingle = (objTo: ObjectOf<any>, obj: ObjectOf<any>) => {
 export const getSetArray = (array: any[]) => {
   return Array.from(new Set(array))
 }
+
+/**
+ * 删除属性
+ */
+export const deleteProperty = (object: ObjectOf<any>, prop: string) => {
+  Reflect.deleteProperty(object, prop)
+}

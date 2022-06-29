@@ -40,8 +40,8 @@ export default abstract class Graph {
     if ((get(options, 'yAxis.type') as any) === 'category') {
       const data = get(options, 'data')
       const _is2Array = is2Array(data as ObjectOf<any>[])
-      let length = _is2Array ? get(options, 'data.0').length : data.length
-      const height = length * 30
+      let length = _is2Array ? get(options, 'data').flat(2).length : data.length
+      const height = length * 36
 
       this.container.style.height = `${height}px`
     }
