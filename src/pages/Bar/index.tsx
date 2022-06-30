@@ -22,6 +22,9 @@ export default function BarPage() {
       data: data1,
       xField: 'name',
       yField: 'value',
+      tooltip: {
+        trigger: 'axis',
+      },
     })
 
     // 2. 有x轴名称和y轴名称
@@ -346,6 +349,34 @@ export default function BarPage() {
         type: 'value', // 增加这个参数
         interval: 1,
       },
+      markLine: {
+        data: [
+          {
+            name: '全区',
+            xAxis: 8,
+            label: {
+              position: 'start',
+              color: '#5AD8A6',
+            },
+            lineStyle: {
+              color: '#5AD8A6',
+              width: 2,
+            },
+          },
+          {
+            name: '公办',
+            xAxis: 6,
+            label: {
+              position: 'start',
+              color: '#748AB1',
+            },
+            lineStyle: {
+              color: '#748AB1',
+              width: 2,
+            },
+          },
+        ],
+      },
     })
   }, [])
 
@@ -437,7 +468,7 @@ export default function BarPage() {
         <div id="chart17"></div>
       </section>
       <section>
-        <h1>18. X、Y轴翻 + 自定义图例</h1>
+        <h1>18. X、Y轴翻 + 自定义图例 + 标注线自定义颜色</h1>
         <p>
           ⚠️注意：自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准
         </p>

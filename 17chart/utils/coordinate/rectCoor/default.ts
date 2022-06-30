@@ -1,11 +1,15 @@
 import { MarkLine, DataZoom } from './type'
+import { ObjectOf } from '../../../types/general'
 
 /**
  * 获取markLine的对象
  * @param isPercent 是否是百分比类型
  * @returns
  */
-export const getMarkLine = (isPercent: boolean): MarkLine => {
+export const getMarkLine = (
+  isPercent: boolean,
+  userOption: ObjectOf<any>,
+): MarkLine => {
   return {
     silent: true,
     symbol: 'none',

@@ -137,14 +137,14 @@ for (let i = 0; i < 4; i++) {
 export const data8 = _data8
 
 export const data9 = [
-  { type: '全区', value: 9 },
-  { type: '公办', value: 9 },
-  { type: '民办', value: 9 },
-  { type: '随迁', value: 9 },
+  { type: '全区', value: 8 },
+  { type: '公办', value: 6 },
+  { type: '民办', value: 7 },
+  { type: '随迁', value: 5 },
   { type: '龙柏一小', value: 9 },
-  { type: '黎明小学', value: 9 },
-  { type: '鹤北小学', value: 9 },
-  { type: '马桥文外', value: 9 },
+  { type: '黎明小学', value: 9.2 },
+  { type: '鹤北小学', value: 8 },
+  { type: '马桥文外', value: 7 },
   { type: '七宝实小', value: 9 },
-  { type: '七宝外小', value: 9 },
+  { type: '七宝外小', value: 10 },
 ]

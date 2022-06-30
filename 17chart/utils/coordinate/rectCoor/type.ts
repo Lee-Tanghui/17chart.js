@@ -2,6 +2,14 @@ export interface MarkLineDataItem {
   name: string
   yAxis?: number
   xAxis?: number
+  label?: {
+    position?: string
+    color?: string
+  }
+  lineStyle?: {
+    color?: string
+    width?: number
+  }
 }
 
 export interface MarkLine {
@@ -88,6 +96,9 @@ export interface YAxis {
   }
   axisLabel: {
     color: string
+  }
+  axisTick: {
+    show: boolean
   }
   minInterval: number
   splitLine: {

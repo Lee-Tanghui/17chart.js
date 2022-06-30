@@ -65,6 +65,9 @@ export const getDefaultOption = (): BarDefaultOption => {
       axisLabel: {
         color: '#999',
       },
+      axisTick: {
+        show: false,
+      },
       minInterval: 1,
       splitLine: {
         lineStyle: {

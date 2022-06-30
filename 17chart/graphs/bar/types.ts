@@ -65,6 +65,9 @@ export interface UserOption {
   isStack?: boolean
   color?: string | string[]
   labelColor?: string | string[]
+  tooltip?: {
+    trigger?: string
+  }
   grid?: {
     top?: number
     bottom?: number

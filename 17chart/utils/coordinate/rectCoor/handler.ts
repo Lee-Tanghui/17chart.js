@@ -29,7 +29,7 @@ export const handler = (
 
   // 处理有辅助线的情况
   if (markLine) {
-    const _markLine = getMarkLine(isPercent)
+    const _markLine = getMarkLine(isPercent, userOption)
     deepAssign(_markLine, markLine)
     defaultOption.series[0].markLine = _markLine
   }
