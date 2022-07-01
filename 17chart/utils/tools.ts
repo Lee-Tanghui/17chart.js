@@ -42,19 +42,12 @@ export const isBoolean = (value: any): boolean => {
  * @param str 字符
  */
 export const isCN = (str: string): boolean => {
-  const cnReg = new RegExp(
-    '([\u4e00-\u9fff]|[\u3002\uff1b\uff0c\uff1a\u201c\u201d\uff08\uff09\u3001\uff1f\u300a\u300b\uff01\u3010\u3011\uffe5])+',
-    'g',
-  )
+  const cnReg = new RegExp('([\u4e00-\u9fff])+', 'g')
   return cnReg.test(str)
 }
 
-/**
- * 获取字符的长度
- * @param str 字符
- * @param fontSize 中文字符所占宽度
- */
-export const getStrLength = (str: string, fontSize: number): number => {
+/**获取字符的长度（以中文字符为准） */
+export const getStrLength = (str: string): number => {
   let cnCount = 0 // 中文字符数
   let enCount = 0 // 英文字符数
 
@@ -62,7 +55,17 @@ export const getStrLength = (str: string, fontSize: number): number => {
     isCN(s) ? cnCount++ : enCount++
   })
 
-  return Math.ceil(cnCount * fontSize + enCount * (fontSize / 2))
+  return cnCount + enCount / 2
+}
+
+/**
+ * 获取字符的长度（以中文字符为准）
+ * @param str 字符
+ * @param fontSize 中文字符所占宽度
+ */
+export const getStrLengthSize = (str: string, fontSize: number): number => {
+  const strLength = getStrLength(str)
+  return Math.ceil(strLength * fontSize)
 }
 
 /**

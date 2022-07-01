@@ -37,7 +37,7 @@ export const getDefaultOption = (): ScatterDefaultOption => {
       nameTextStyle: {
         color: '#999',
         verticalAlign: 'top',
-        lineHeight: 22,
+        lineHeight: 18,
       },
       axisLabel: {
         rotate: 0,

@@ -3,6 +3,7 @@ import {
   deepAssign,
   is2Array,
   insertNewlineEveryTen,
+  getStrLengthSize,
   getStrLength,
 } from '../../tools'
 import { getMarkLine, getDataZoom } from './default'
@@ -105,7 +106,7 @@ export const getLabelMaxHeightByRotateXAxisLabel = (
   const angle = (get(userOption, 'xAxis.axisLabel.rotate') as unknown) as number
   const xAxisList = getAxisList(userOption)
   const maxLabel = getMaxAxisLabel(xAxisList)
-  const length = getStrLength(maxLabel, FONT_SIZE.AXIS_LABEL)
+  const length = getStrLengthSize(maxLabel, FONT_SIZE.AXIS_LABEL)
   const height =
     Math.sin(angle) *
     (length >= ONE_ROW_MAX_LENGTH ? ONE_ROW_MAX_LENGTH : length)
@@ -229,9 +230,10 @@ const getExtraWidth = (
   isPercent: boolean,
   type: string,
 ): number => {
-  const percentUnitWidth = type === 'right' ? 10 : 8
-  if (name.length > 2) {
-    return (name.length - 2) * (isPercent ? percentUnitWidth : 16)
+  const percentUnitWidth = type === 'right' ? 6 : 8
+  const length = getStrLength(name)
+  if (length > 2) {
+    return (length - 2) * (isPercent ? percentUnitWidth : 16)
   } else {
     return 0
   }
@@ -248,7 +250,7 @@ export const setExtraGrid = (
   type: GridEumType,
   extraLength: number,
 ): void => {
-  if (!option) {
+  if (!option || !option.grid || !option.grid.hasOwnProperty(type)) {
     return
   }
   option.grid[type] = option.grid[type] + extraLength

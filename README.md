@@ -18,6 +18,7 @@
 - `lengend`、`dataZoom`影响`grid.bottom`或者`grid.top`的值
 - `xAxis.name`和`yAxis.name`影响`grid.bottom`或者`grid.top`的值
 - `xAxsi`是表示数值的条形图时，图表容器的高度需要根据数值个数调整高度
+- 饼图的显示需要从小到大、或者从大到小进行排序
 - 等等
 
 
