@@ -6,5 +6,5 @@ export enum GridEumType {
   RIGHT = 'right',
   LEFT = 'left',
   TOP = 'top',
-  bottom = 'bottom',
+  BOTTOM = 'bottom',
 }

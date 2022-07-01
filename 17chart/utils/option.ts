@@ -1,8 +1,11 @@
 import get from './safe-get'
 import set from './safe-set'
 import { isArray, isString, isBoolean } from './tools'
-import { ObjectOf } from '../types/general'
-import { getIsLegendShow } from '../utils/coordinate/rectCoor/handler'
+import { ObjectOf, GridEumType } from '../types/general'
+import {
+  getIsLegendYAxisShow,
+  setExtraGrid,
+} from '../utils/coordinate/rectCoor/handler'
 
 /**
  * 统一处理Option
@@ -40,10 +43,14 @@ export const handler = (
     }
   }
 
-  // 如果有legend的话，需要增加grid.bottom的值
-  if (getIsLegendShow(userOption) && !userOption.dataZoom) {
-    const gridBottom = (get(defaultOption, 'grid.bottom') as unknown) as number
-    set(defaultOption, 'grid.bottom', gridBottom + 32)
+  // 如果y轴方向的legend的话，需要增加grid.bottom的值
+  const { isTrue, position } = getIsLegendYAxisShow(defaultOption)
+  if (isTrue && !userOption.dataZoom) {
+    setExtraGrid(
+      defaultOption,
+      position === GridEumType.TOP ? GridEumType.TOP : GridEumType.BOTTOM,
+      32,
+    )
   }
 
   // 是否显示数据label

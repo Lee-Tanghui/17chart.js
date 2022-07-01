@@ -97,7 +97,7 @@ export interface YAxis {
   axisLabel: {
     color: string
   }
-  axisTick: {
+  axisTick?: {
     show: boolean
   }
   minInterval: number

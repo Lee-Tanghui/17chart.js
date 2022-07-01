@@ -76,6 +76,10 @@ export interface UserOption {
   }
   legend?: {
     show?: boolean
+    top?: number | string
+    bottom?: number | string
+    left?: number | string
+    right?: number | string
     custom?: any[]
   }
   isShowLabel?: boolean

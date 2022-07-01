@@ -9,6 +9,7 @@ import {
   data6,
   data7,
   data9,
+  data10,
 } from './mock/data'
 import { Affix, Button } from 'antd'
 import ConfigPanel from '../../components/configPanel'
@@ -210,14 +211,18 @@ export default function BarPage() {
       },
     })
 
-    // 12. 取消label名称
-    new $17chart.Bar('chart12', {
+    // 12. 取消label名称 + 调整legend的位置
+    const { option } = new $17chart.Bar('chart12', {
       renderer: 'svg',
       data: data1,
       xField: 'name',
       yField: 'value',
       isShowLabel: false,
       name: '参测情况',
+      legend: {
+        top: 12,
+        bottom: 20,
+      },
       xAxis: {
         name: '学科',
       },
@@ -225,6 +230,7 @@ export default function BarPage() {
         name: '参测人数',
       },
     })
+    console.log(option)
 
     // 13. 堆叠柱状图
     new $17chart.Bar('chart13', {
@@ -311,6 +317,7 @@ export default function BarPage() {
     new $17chart.Bar('chart17', {
       xField: 'value',
       yField: 'type',
+      renderer: 'svg',
       data: data9.flat(Infinity),
       color: ['#5AD8A6', '#748AB1', '#F7C739', '#EB7E65', '#5B8FF9'],
       bar: {
@@ -327,7 +334,7 @@ export default function BarPage() {
       },
     })
     // 18. X、Y轴翻转（自定义图例）
-    const { option } = new $17chart.Bar('chart18', {
+    new $17chart.Bar('chart18', {
       xField: 'value',
       yField: 'type',
       data: data9.flat(Infinity),
@@ -376,6 +383,31 @@ export default function BarPage() {
             },
           },
         ],
+      },
+    })
+    // 19. X、Y轴翻转（自定义图例）
+    new $17chart.Bar('chart19', {
+      xField: 'value',
+      yField: 'type',
+      renderer: 'svg',
+      data: data10.flat(Infinity),
+      legend: {
+        // custom的图例只允许在y轴方向，不允许在x轴方向
+        top: 16,
+        // 注意添加了legend.custom后，不再允许增加color和bar.colorCategory
+        custom: [
+          { name: '全区', color: '#5AD8A6' },
+          { name: '公办', color: '#748AB1' },
+          { name: '本校', color: '#5B8FF9' },
+        ],
+      },
+      yAxis: {
+        type: 'category', // 增加这个参数
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value', // 增加这个参数
+        interval: 1,
       },
     })
   }, [])
@@ -444,7 +476,7 @@ export default function BarPage() {
         <div id="chart11"></div>
       </section>
       <section>
-        <h1>12. 取消label名称</h1>
+        <h1>12. 取消label名称 + 调整legend的位置</h1>
         <div id="chart12"></div>
       </section>
       <section>
@@ -469,10 +501,17 @@ export default function BarPage() {
       </section>
       <section>
         <h1>18. X、Y轴翻 + 自定义图例 + 标注线自定义颜色</h1>
-        <p>
-          ⚠️注意：自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准
-        </p>
+        <p>⚠️注意：</p>
+        <p>1. 自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准</p>
+        <p>2. 自定义图例的的legend位置只允许设置top或bottom</p>
         <div id="chart18"></div>
+      </section>
+      <section>
+        <h1>19. X、Y轴翻 + 自定义图例 + 图例位置设置</h1>
+        <p>⚠️注意：</p>
+        <p>1. 自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准</p>
+        <p>2. 自定义图例的的legend位置只允许设置top或bottom</p>
+        <div id="chart19"></div>
       </section>
     </div>
   )

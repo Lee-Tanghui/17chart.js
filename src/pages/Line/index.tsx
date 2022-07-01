@@ -60,13 +60,16 @@ export default function LinePage() {
         name: '人数占比',
       },
     })
-    // 5. 有name的情况
-    new $17chart.Line('chart5', {
+    // 5. 有name的情况 + 调整legend位置
+    const { option } = new $17chart.Line('chart5', {
       renderer: 'svg',
       name: '参测情况',
       data: data1,
       xField: 'name',
       yField: 'value',
+      legend: {
+        top: 16,
+      },
       xAxis: {
         name: '学科',
       },
@@ -74,6 +77,7 @@ export default function LinePage() {
         name: '参测人数',
       },
     })
+    console.log(option)
     // 6. 多折线图
     new $17chart.Line('chart6', {
       renderer: 'svg',
@@ -205,7 +209,7 @@ export default function LinePage() {
         <div id="chart4"></div>
       </section>
       <section>
-        <h1>5. 有name的情况</h1>
+        <h1>5. 有name的情况 + 调整legend位置</h1>
         <div id="chart5"></div>
       </section>
       <section>

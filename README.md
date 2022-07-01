@@ -17,6 +17,7 @@
 - 小数格式化成为百分比数据后，`yAxis`、`label`、`tooltip`等都需要进行格式化显示
 - `lengend`、`dataZoom`影响`grid.bottom`或者`grid.top`的值
 - `xAxis.name`和`yAxis.name`影响`grid.bottom`或者`grid.top`的值
+- `xAxsi`是表示数值的条形图时，图表容器的高度需要根据数值个数调整高度
 - 等等
 
 
@@ -24,7 +25,7 @@
 
 ## 如何使用17chart.js
 
-> 当前还未发布npm，还在开发beta阶段，请勿使用!
+> 当前还未发布npm，还在开发内测-`alpha`阶段，请勿使用!
 
 ### 1. 安装17chart.js
 
@@ -39,7 +40,6 @@ import $17chart from '17chart.js'
 import '17chart.js/17chart.css'
 
 new $17chart.Bar('chart1', {
-  renderer: 'svg',
   data: data1,
   xField: 'name',
   yField: 'value',

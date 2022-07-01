@@ -103,9 +103,15 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
       })
       .join('')
     const legendDom: HTMLElement = document.createElement('div')
+    const isTop = (userOption.legend as ObjectOf<any>).hasOwnProperty('top')
+    const top = (userOption.legend as ObjectOf<any>).top || 16
+    const bottom = (userOption.legend as ObjectOf<any>).bottom || 16
+    const position = isTop ? 'top' : 'bottom'
+    const positionValue = isTop ? top : bottom
+
     legendDom.setAttribute(
       'style',
-      `position:absolute;bottom: 16px;width:100%;display:flex;justify-content:center`,
+      `position:absolute;${position}: ${positionValue}px;width:100%;display:flex;justify-content:center`,
     )
     legendDom.id = ID
     legendDom.innerHTML = legends
@@ -126,6 +132,15 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
     if ((get(userOption, 'bar.colorBy') as unknown) === 'data') {
       console.error(
         'Invalid option: bar.colorBy is data is invalid when you set legend.custom ',
+      )
+    }
+
+    if (
+      (userOption.legend as ObjectOf<any>).hasOwnProperty('right') ||
+      (userOption.legend as ObjectOf<any>).hasOwnProperty('left')
+    ) {
+      console.error(
+        'Invalid option: grid.right or grid.left is not allowed when you set legend.custom',
       )
     }
 

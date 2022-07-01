@@ -3,6 +3,7 @@ import { ObjectOf } from '../types/general'
 import {
   getIsNeedRotate,
   getLabelMaxHeightByRotateXAxisLabel,
+  getIsLegendYAxisShow,
 } from '../utils/coordinate/rectCoor/handler'
 import { HEIGHT } from '../utils/constants'
 import get from '../utils/safe-get'
@@ -42,8 +43,9 @@ export default abstract class Graph {
       const _is2Array = is2Array(data as ObjectOf<any>[])
       let length = _is2Array ? get(options, 'data').flat(2).length : data.length
       const height = length * 36
+      const { isTrue } = getIsLegendYAxisShow(options)
 
-      this.container.style.height = `${height}px`
+      this.container.style.height = `${height + (isTrue ? 92 : 0)}px`
     }
 
     // 如果旋转X轴坐标名称，如果名称过程，需要增加容器的高度。否则会出现图表展现区域过小的情况

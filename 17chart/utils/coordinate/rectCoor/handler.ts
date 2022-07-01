@@ -172,6 +172,53 @@ export const getIsLegendShow = (userOption: any): boolean => {
 }
 
 /**
+ * 判断是否有位于Y轴的legend（会影响容器位置）
+ */
+interface IsLegendYAxisShow {
+  isTrue: boolean
+  position: string
+}
+export const getIsLegendYAxisShow = (
+  userOption: ObjectOf<any>,
+): IsLegendYAxisShow => {
+  const isShow = getIsLegendShow(userOption)
+  const legend = get(userOption, 'legend')
+  const isYAxisLegend =
+    !getIsSetLegendPosition(userOption) ||
+    (legend &&
+      (legend.hasOwnProperty('bottom') || legend.hasOwnProperty('top')))
+
+  let position = ''
+
+  if (legend && legend.hasOwnProperty('bottom')) {
+    position = 'bottom'
+  }
+
+  if (legend && legend.hasOwnProperty('top')) {
+    position = 'top'
+  }
+
+  return {
+    isTrue: isShow && isYAxisLegend,
+    position,
+  }
+}
+
+/**
+ * 判断用户是否有设置legend的位置
+ * 没有的话默认是底部显示, 即bottom
+ */
+export const getIsSetLegendPosition = (userOption: ObjectOf<any>) => {
+  const legend = get(userOption, 'legend')
+  return (
+    legend &&
+    !!Object.keys(legend).find(position => {
+      return ['top', 'bottom', 'left', 'right'].includes(position)
+    })
+  )
+}
+
+/**
  * 获取额外的宽度
  * @param { string } name
  * @param { boolean } isPercent
@@ -196,11 +243,14 @@ const getExtraWidth = (
  * @param type 要设置的gird.类型
  * @param extraLength
  */
-const setExtraGrid = (
+export const setExtraGrid = (
   option: ObjectOf<any>,
   type: GridEumType,
   extraLength: number,
 ): void => {
+  if (!option) {
+    return
+  }
   option.grid[type] = option.grid[type] + extraLength
 }
 

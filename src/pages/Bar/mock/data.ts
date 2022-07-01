@@ -148,3 +148,9 @@ export const data9 = [
   { type: '七宝实小', value: 9 },
   { type: '七宝外小', value: 10 },
 ]
+
+export const data10 = [
+  { type: '全区', value: 9 },
+  { type: '公办', value: 9 },
+  { type: '本校', value: 9 },
+]
