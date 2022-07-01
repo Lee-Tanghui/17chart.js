@@ -61,7 +61,7 @@ export default function LinePage() {
       },
     })
     // 5. 有name的情况 + 调整legend位置
-    const { option } = new $17chart.Line('chart5', {
+    new $17chart.Line('chart5', {
       renderer: 'svg',
       name: '参测情况',
       data: data1,
@@ -77,7 +77,6 @@ export default function LinePage() {
         name: '参测人数',
       },
     })
-    console.log(option)
     // 6. 多折线图
     new $17chart.Line('chart6', {
       renderer: 'svg',

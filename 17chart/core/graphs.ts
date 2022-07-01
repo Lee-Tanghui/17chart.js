@@ -40,8 +40,13 @@ export default abstract class Graph {
     // 如果是X轴和Y轴翻转的情况，此时应该根据数据去调整容器的高度
     if ((get(options, 'yAxis.type') as any) === 'category') {
       const data = get(options, 'data')
+      const isStack = get(options, 'isStack')
       const _is2Array = is2Array(data as ObjectOf<any>[])
-      let length = _is2Array ? get(options, 'data').flat(2).length : data.length
+      let length = _is2Array
+        ? isStack
+          ? data.length
+          : data.flat(2).length
+        : data.length
       const height = length * 36
       const { isTrue } = getIsLegendYAxisShow(options)
 
@@ -101,15 +106,13 @@ export default abstract class Graph {
     }
     // 【参数错误检测】：传递的id，但是没有获取到元素
     if (typeof container === 'string' && !this.container) {
-      console.error(`Invalid id: Can't get the dom that id is ${container}`)
-      return
+      throw TypeError(`Invalid id: Can't get the dom that id is ${container}`)
     }
     // 【参数错误检测】：传递的不是id，但是不是一个DOM节点
     if (typeof container !== 'string' && this.container.nodeType !== 1) {
-      console.error('Invalid Type: container is not a dom element')
-      return
+      throw TypeError('Invalid Type: container is not a dom element')
     }
-    // 【参数错误检测】：optionss不是一个数组
+    // 【参数错误检测】：options不是一个数组
     if (!checkIsValidData(get(options, 'data'))) {
       console.error('Invalid Type: options.data should be type of Array')
       return

@@ -154,3 +154,36 @@ export const data10 = [
   { type: '公办', value: 9 },
   { type: '本校', value: 9 },
 ]
+
+export const data11 = [
+  [
+    { country: 'A', year: '全区', value: 0.4715 },
+    { country: 'A', year: '公办', value: 0.5092 },
+    { country: 'A', year: '民办', value: 0.5406 },
+    { country: 'A', year: '随迁', value: 0.2329 },
+  ],
+  [
+    { country: 'B', year: '全区', value: 0.3405 },
+    { country: 'B', year: '公办', value: 0.344 },
+    { country: 'B', year: '民办', value: 0.2457 },
+    { country: 'B', year: '随迁', value: 0.3815 },
+  ],
+  [
+    { country: 'C', year: '全区', value: 0.0817 },
+    { country: 'C', year: '公办', value: 0.0689 },
+    { country: 'C', year: '民办', value: 0.0919 },
+    { country: 'C', year: '随迁', value: 0.1419 },
+  ],
+  [
+    { country: 'D', year: '全区', value: 0.064 },
+    { country: 'D', year: '公办', value: 0.0477 },
+    { country: 'D', year: '民办', value: 0.0812 },
+    { country: 'D', year: '随迁', value: 0.1379 },
+  ],
+  [
+    { country: 'E', year: '全区', value: 0.0422 },
+    { country: 'E', year: '公办', value: 0.0302 },
+    { country: 'E', year: '民办', value: 0.0406 },
+    { country: 'E', year: '随迁', value: 0.1058 },
+  ],
+]

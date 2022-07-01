@@ -52,6 +52,11 @@ const getSeries = (userOption: ObjectOf<any>) => {
       }
     })
 
+    // x、y轴互换的情况，label的position的位置会有所变化
+    if (isExchangeAxis) {
+      seriesItem.label.position = 'right'
+    }
+
     // 堆积柱状图
     if (isStack) {
       seriesItem.stack = 'total'
@@ -62,11 +67,6 @@ const getSeries = (userOption: ObjectOf<any>) => {
           ? labelColor[index]
           : labelColor
       }
-    }
-
-    // x、y轴互换的情况，label的position的位置会有所变化
-    if (isExchangeAxis) {
-      seriesItem.label.position = 'right'
     }
 
     if (bar) {

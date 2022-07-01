@@ -10,6 +10,7 @@ import {
   data7,
   data9,
   data10,
+  data11,
 } from './mock/data'
 import { Affix, Button } from 'antd'
 import ConfigPanel from '../../components/configPanel'
@@ -212,7 +213,7 @@ export default function BarPage() {
     })
 
     // 12. 取消label名称 + 调整legend的位置
-    const { option } = new $17chart.Bar('chart12', {
+    new $17chart.Bar('chart12', {
       renderer: 'svg',
       data: data1,
       xField: 'name',
@@ -230,7 +231,6 @@ export default function BarPage() {
         name: '参测人数',
       },
     })
-    console.log(option)
 
     // 13. 堆叠柱状图
     new $17chart.Bar('chart13', {
@@ -410,6 +410,29 @@ export default function BarPage() {
         interval: 1,
       },
     })
+
+    // 20. X、Y轴翻转 + 堆积柱状图
+    const { option } = new $17chart.Bar('chart20', {
+      data: data11,
+      xField: 'value',
+      yField: 'year',
+      isStack: true,
+      labelColor: '#fff',
+      name: ['A', 'B', 'C', 'D', 'E'],
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      isPercent: true,
+      yAxis: {
+        type: 'category',
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value',
+        interval: 0.1,
+      },
+    })
   }, [])
 
   const [visible, setVisible] = useState(false)
@@ -512,6 +535,10 @@ export default function BarPage() {
         <p>1. 自定义图例的配置和自定义颜色互斥，会优先以自定义图例的颜色为准</p>
         <p>2. 自定义图例的的legend位置只允许设置top或bottom</p>
         <div id="chart19"></div>
+      </section>
+      <section>
+        <h1>20. X、Y轴翻转 + 堆积柱状图</h1>
+        <div id="chart20"></div>
       </section>
     </div>
   )
