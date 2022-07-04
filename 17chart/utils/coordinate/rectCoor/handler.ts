@@ -209,9 +209,9 @@ export const getIsLegendYAxisShow = (
  * 判断用户是否有设置legend的位置
  * 没有的话默认是底部显示, 即bottom
  */
-export const getIsSetLegendPosition = (userOption: ObjectOf<any>) => {
+export const getIsSetLegendPosition = (userOption: ObjectOf<any>): boolean => {
   const legend = get(userOption, 'legend')
-  return (
+  return !!(
     legend &&
     !!Object.keys(legend).find(position => {
       return ['top', 'bottom', 'left', 'right'].includes(position)

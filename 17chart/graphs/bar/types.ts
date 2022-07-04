@@ -57,6 +57,7 @@ export interface CustomLegend {
 
 export interface UserOption {
   // 字段名
+  height?: number
   xField: string
   yField: string
   data: any[]
@@ -110,5 +111,6 @@ export interface UserOption {
   bar?: {
     colorBy?: string
     colorCategory?: string
+    barWidth?: number
   }
 }

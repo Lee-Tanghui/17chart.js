@@ -187,3 +187,10 @@ export const data11 = [
     { country: 'E', year: '随迁', value: 0.1058 },
   ],
 ]
+
+export const data12 = [
+  { type: '图形与几何', value: 301.41 },
+  { type: '数与运算', value: 304.95 },
+  { type: '方程与代数', value: 300.99 },
+  { type: '概率与统计', value: 303.13 },
+]

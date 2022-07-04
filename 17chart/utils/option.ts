@@ -44,7 +44,8 @@ export const handler = (
   }
 
   // 如果y轴方向的legend的话，需要增加grid.bottom的值
-  const { isTrue, position } = getIsLegendYAxisShow(defaultOption)
+  const { isTrue, position } = getIsLegendYAxisShow(userOption)
+
   if (isTrue && !userOption.dataZoom) {
     setExtraGrid(
       defaultOption,

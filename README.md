@@ -47,3 +47,6 @@ new $17chart.Bar('chart1', {
 })
 ```
 
+## 版本日志
+
+- [版本日志文件](https://github.com/Lee-Tanghui/17chart.js/blob/main/CHANGELOG.md)

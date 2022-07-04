@@ -11,6 +11,7 @@ import {
   data9,
   data10,
   data11,
+  data12,
 } from './mock/data'
 import { Affix, Button } from 'antd'
 import ConfigPanel from '../../components/configPanel'
@@ -412,7 +413,7 @@ export default function BarPage() {
     })
 
     // 20. X、Y轴翻转 + 堆积柱状图
-    const { option } = new $17chart.Bar('chart20', {
+    new $17chart.Bar('chart20', {
       data: data11,
       xField: 'value',
       yField: 'year',
@@ -431,6 +432,66 @@ export default function BarPage() {
       xAxis: {
         type: 'value',
         interval: 0.1,
+      },
+    })
+
+    // 21. 自定义柱状图宽度
+    new $17chart.Bar('chart21', {
+      renderer: 'svg',
+      data: data1,
+      xField: 'name',
+      yField: 'value',
+      bar: {
+        barWidth: 20,
+      },
+      tooltip: {
+        trigger: 'axis',
+      },
+    })
+
+    // 22. 自定义柱状图宽度
+    new $17chart.Bar('chart22', {
+      renderer: 'svg',
+      data: data12,
+      xField: 'value',
+      yField: 'type',
+      xAxis: {
+        type: 'value',
+      },
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      yAxis: {
+        type: 'category',
+      },
+      bar: {
+        barWidth: 32,
+      },
+      tooltip: {
+        trigger: 'axis',
+      },
+    })
+
+    // 23. 自定义图表高度
+    new $17chart.Bar('chart23', {
+      height: 300,
+      renderer: 'svg',
+      data: data12,
+      xField: 'value',
+      yField: 'type',
+      xAxis: {
+        type: 'value',
+      },
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      yAxis: {
+        type: 'category',
+      },
+      tooltip: {
+        trigger: 'axis',
       },
     })
   }, [])
@@ -539,6 +600,18 @@ export default function BarPage() {
       <section>
         <h1>20. X、Y轴翻转 + 堆积柱状图</h1>
         <div id="chart20"></div>
+      </section>
+      <section>
+        <h1>21. 自定义柱状图宽度</h1>
+        <div id="chart21"></div>
+      </section>
+      <section>
+        <h1>22. X、Y轴翻转 + 自定义柱状图宽度</h1>
+        <div id="chart22"></div>
+      </section>
+      <section>
+        <h1>23. 自定义图表高度</h1>
+        <div id="chart23"></div>
       </section>
     </div>
   )

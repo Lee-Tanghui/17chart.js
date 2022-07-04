@@ -161,6 +161,13 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
   }
 }
 
+/**
+ * 自定义柱状图颜色的策略检查
+ * 策略分为：
+ *  - inherit： 如果数据的颜色要比给定的颜色多，此时应该以最后一个颜色进行扩充
+ *  - loop：  如果数据的颜色要比给定的颜色多，此时循环第一个的颜色，以此类推
+ * @param userOption
+ */
 const checkColorCategory = (userOption: UserOption) => {
   // 自定义柱状图颜色的情况
   const colorCategory = get(userOption, 'bar.colorCategory')
@@ -171,7 +178,6 @@ const checkColorCategory = (userOption: UserOption) => {
     colorCategory &&
     (colorCategory as unknown) === 'inherit'
   ) {
-    // 如果数据的颜色要比给定的颜色多，当是inherit情况的时候，此时应该以最后一个颜色进行扩充
     const dataLength = userOption.data.length
     if (color.length < dataLength) {
       const lastColor = color[color.length - 1]
@@ -181,4 +187,18 @@ const checkColorCategory = (userOption: UserOption) => {
       }
     }
   }
+}
+
+/**
+ * 获取多维度的堆积柱状图的数据项（取最大的）
+ */
+export const get2ArrayStackBarLength = (data: ObjectOf<any>[][]): number => {
+  let max = 0
+  data.forEach(array => {
+    if (array.length >= max) {
+      max = array.length
+    }
+  })
+
+  return max
 }
