@@ -15,6 +15,7 @@ import {
 export const handler = (
   defaultOption: ObjectOf<any>,
   userOption: ObjectOf<any>,
+  chartInstance?: any,
 ) => {
   const { isPercent, percentFixed, name, isShowLabel } = userOption
   // 如果是百分比的情况，则需要做格式化处理
@@ -24,11 +25,17 @@ export const handler = (
       return (value * 100).toFixed(percentFixed) + '%'
     })
     // 设置label的格式化处理
-    defaultOption.series.forEach((serieItem: ObjectOf<any>) => {
-      set(serieItem, 'label.formatter', function(item: ObjectOf<any>) {
-        return (item.value * 100).toFixed(percentFixed) + '%'
+    const labelFormatter = get(
+      userOption,
+      `${chartInstance.type}.label.formatter`,
+    )
+    if (!labelFormatter) {
+      defaultOption.series.forEach((serieItem: ObjectOf<any>) => {
+        set(serieItem, 'label.formatter', function(item: ObjectOf<any>) {
+          return (item.value * 100).toFixed(percentFixed) + '%'
+        })
       })
-    })
+    }
   }
 
   // 如果name存在, 需要处理到series[index].name上 ，且可能需要改变tooltip的trigger

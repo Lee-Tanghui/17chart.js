@@ -11,6 +11,7 @@ import {
   data9,
   data10,
   data11,
+  data13_4,
   data12,
 } from './mock/data'
 import { Affix, Button } from 'antd'
@@ -233,8 +234,8 @@ export default function BarPage() {
       },
     })
 
-    // 13. 堆叠柱状图
-    new $17chart.Bar('chart13', {
+    // 13-1. 堆叠柱状图
+    new $17chart.Bar('chart13-1', {
       renderer: 'svg',
       data: data7,
       xField: 'name',
@@ -252,8 +253,8 @@ export default function BarPage() {
       },
     })
 
-    // 14. 堆叠柱状图（程度递进：优秀、良好、一般、不及格）
-    const chart14 = new $17chart.Bar('chart14', {
+    // 13-2. 堆叠柱状图（程度递进：优秀、良好、一般、不及格）
+    new $17chart.Bar('chart13-2', {
       renderer: 'svg',
       data: data7,
       xField: 'name',
@@ -274,6 +275,86 @@ export default function BarPage() {
         brushSelect: false,
         start: 15,
         end: 85,
+      },
+    })
+
+    // 13-3. X、Y轴翻转 + 堆积柱状图
+    new $17chart.Bar('chart13-3', {
+      data: data11,
+      xField: 'value',
+      yField: 'year',
+      isStack: true,
+      labelColor: '#fff',
+      name: ['A', 'B', 'C', 'D', 'E'],
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      isPercent: true,
+      yAxis: {
+        type: 'category',
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value',
+        interval: 0.1,
+      },
+    })
+
+    // 13-4. 堆叠柱状图 - 自定义label显示逻辑
+    const { option } = new $17chart.Bar('chart13-4', {
+      data: data13_4,
+      xField: 'value',
+      yField: 'year',
+      isStack: true,
+      labelColor: '#fff',
+      name: ['A', 'B', 'C', 'D', 'E'],
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      bar: {
+        label: {
+          formatter: item => {
+            if (item.value >= 0.03) {
+              return (item.value * 100).toFixed(0) + '%'
+            } else {
+              return ''
+            }
+          },
+        },
+      },
+      isPercent: true,
+      yAxis: {
+        type: 'category',
+        inverse: true,
+      },
+      xAxis: {
+        type: 'value',
+        interval: 0.1,
+      },
+    })
+    console.log(option)
+
+    // 14. 自定义图表高度
+    new $17chart.Bar('chart14', {
+      height: 400,
+      renderer: 'svg',
+      data: data12,
+      xField: 'value',
+      yField: 'type',
+      xAxis: {
+        type: 'value',
+      },
+      grid: {
+        left: 166,
+        right: 166,
+      },
+      yAxis: {
+        type: 'category',
+      },
+      tooltip: {
+        trigger: 'axis',
       },
     })
 
@@ -412,31 +493,8 @@ export default function BarPage() {
       },
     })
 
-    // 20. X、Y轴翻转 + 堆积柱状图
+    // 20. 自定义柱状图宽度
     new $17chart.Bar('chart20', {
-      data: data11,
-      xField: 'value',
-      yField: 'year',
-      isStack: true,
-      labelColor: '#fff',
-      name: ['A', 'B', 'C', 'D', 'E'],
-      grid: {
-        left: 166,
-        right: 166,
-      },
-      isPercent: true,
-      yAxis: {
-        type: 'category',
-        inverse: true,
-      },
-      xAxis: {
-        type: 'value',
-        interval: 0.1,
-      },
-    })
-
-    // 21. 自定义柱状图宽度
-    new $17chart.Bar('chart21', {
       renderer: 'svg',
       data: data1,
       xField: 'name',
@@ -449,8 +507,8 @@ export default function BarPage() {
       },
     })
 
-    // 22. 自定义柱状图宽度
-    new $17chart.Bar('chart22', {
+    // 21. 自定义柱状图宽度
+    new $17chart.Bar('chart21', {
       renderer: 'svg',
       data: data12,
       xField: 'value',
@@ -467,28 +525,6 @@ export default function BarPage() {
       },
       bar: {
         barWidth: 32,
-      },
-      tooltip: {
-        trigger: 'axis',
-      },
-    })
-
-    // 23. 自定义图表高度
-    new $17chart.Bar('chart23', {
-      height: 300,
-      renderer: 'svg',
-      data: data12,
-      xField: 'value',
-      yField: 'type',
-      xAxis: {
-        type: 'value',
-      },
-      grid: {
-        left: 166,
-        right: 166,
-      },
-      yAxis: {
-        type: 'category',
       },
       tooltip: {
         trigger: 'axis',
@@ -565,10 +601,17 @@ export default function BarPage() {
       </section>
       <section>
         <h1>13. 堆叠柱状图</h1>
-        <div id="chart13"></div>
+        <h3>13.1. 普通堆叠柱状图</h3>
+        <div id="chart13-1"></div>
+        <h3>13.2. 程度递进的关系的堆叠柱状图 + DataZoom</h3>
+        <div id="chart13-2"></div>
+        <h3>13.3. X、Y轴翻转的堆叠柱状图</h3>
+        <div id="chart13-3"></div>
+        <h3>13.4. 堆叠柱状图-自定义label显示逻辑</h3>
+        <div id="chart13-4"></div>
       </section>
       <section>
-        <h1>14. 堆叠柱状图（程度递进的关系）</h1>
+        <h1>14. 自定义图表高度</h1>
         <div id="chart14"></div>
       </section>
       <section>
@@ -598,20 +641,12 @@ export default function BarPage() {
         <div id="chart19"></div>
       </section>
       <section>
-        <h1>20. X、Y轴翻转 + 堆积柱状图</h1>
+        <h1>20. 自定义柱状图宽度</h1>
         <div id="chart20"></div>
       </section>
       <section>
-        <h1>21. 自定义柱状图宽度</h1>
+        <h1>21. X、Y轴翻转 + 自定义柱状图宽度</h1>
         <div id="chart21"></div>
-      </section>
-      <section>
-        <h1>22. X、Y轴翻转 + 自定义柱状图宽度</h1>
-        <div id="chart22"></div>
-      </section>
-      <section>
-        <h1>23. 自定义图表高度</h1>
-        <div id="chart23"></div>
       </section>
     </div>
   )

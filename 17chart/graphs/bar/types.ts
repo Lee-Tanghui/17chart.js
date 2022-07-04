@@ -112,5 +112,8 @@ export interface UserOption {
     colorBy?: string
     colorCategory?: string
     barWidth?: number
+    label?: {
+      formatter?: Function | string
+    }
   }
 }

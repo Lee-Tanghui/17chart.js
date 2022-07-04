@@ -86,8 +86,6 @@ export default abstract class Graph {
         ? barWidth + unitBarSpace * barWidth
         : BASE_UNIT_PER_LEGNTH
 
-      console.log(unitPerLength)
-
       const height = length * unitPerLength
       const { isTrue } = getIsLegendYAxisShow(options)
 
@@ -107,13 +105,6 @@ export default abstract class Graph {
       }
     }
 
-    // 如果有设置自定义高度
-    if (get(options, 'height')) {
-      const height = get(options, 'height')
-      Reflect.deleteProperty(options, 'height')
-      this.container.style.height = `${height}px`
-    }
-
     // 设置renderer
     const chartInitOption = {
       renderer: options.renderer ? options.renderer : 'canvas',
@@ -131,6 +122,12 @@ export default abstract class Graph {
   }
 
   public render() {
+    // 如果有设置自定义高度（重置容器高度）
+    if (get(this.option, 'height')) {
+      const height = get(this.option, 'height')
+      Reflect.deleteProperty(this.option, 'height')
+      this.container.style.height = `${height}px`
+    }
     this.chart.clear()
     this.chart.setOption(this.option)
   }

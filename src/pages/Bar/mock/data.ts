@@ -188,6 +188,39 @@ export const data11 = [
   ],
 ]
 
+export const data13_4 = [
+  [
+    { country: 'A', year: '全区', value: 0.9715 },
+    { country: 'A', year: '公办', value: 0.5092 },
+    { country: 'A', year: '民办', value: 0.5406 },
+    { country: 'A', year: '随迁', value: 0.2329 },
+  ],
+  [
+    { country: 'B', year: '全区', value: 0.0105 },
+    { country: 'B', year: '公办', value: 0.444 },
+    { country: 'B', year: '民办', value: 0.2457 },
+    { country: 'B', year: '随迁', value: 0.3815 },
+  ],
+  [
+    { country: 'C', year: '全区', value: 0.0117 },
+    { country: 'C', year: '公办', value: 0.0189 },
+    { country: 'C', year: '民办', value: 0.0919 },
+    { country: 'C', year: '随迁', value: 0.1419 },
+  ],
+  [
+    { country: 'D', year: '全区', value: 0.004 },
+    { country: 'D', year: '公办', value: 0.0177 },
+    { country: 'D', year: '民办', value: 0.0812 },
+    { country: 'D', year: '随迁', value: 0.1379 },
+  ],
+  [
+    { country: 'E', year: '全区', value: 0.0022 },
+    { country: 'E', year: '公办', value: 0.0102 },
+    { country: 'E', year: '民办', value: 0.036 },
+    { country: 'E', year: '随迁', value: 0.1058 },
+  ],
+]
+
 export const data12 = [
   { type: '图形与几何', value: 301.41 },
   { type: '数与运算', value: 304.95 },

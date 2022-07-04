@@ -21,11 +21,11 @@ export default class Bar extends Graph {
     this.type = GRAPH_TYPES.BAR
     const defaultOption = getDefaultOption()
     // 柱状图自定义merge
-    merge(defaultOption, userOption, this)
+    merge.bind(this)(defaultOption, userOption, this)
     // 直角坐标系处理
-    rectCoorHandler(defaultOption, userOption)
+    rectCoorHandler.bind(this)(defaultOption, userOption)
     // 统一处理
-    handler(defaultOption, userOption)
+    handler(defaultOption, userOption, this)
     // 设置this.option
     this.option = defaultOption
   }
