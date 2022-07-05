@@ -25,7 +25,7 @@ export default class Scatter extends Graph {
     // 直角坐标系处理
     rectCoorHandler(defaultOption, userOption)
     // 统一处理
-    handler(defaultOption, userOption)
+    handler(defaultOption, userOption, this)
 
     this.option = defaultOption
   }

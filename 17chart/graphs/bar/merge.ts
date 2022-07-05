@@ -12,6 +12,7 @@ import { getBarSerieItem } from './default'
 import {
   getAxisList,
   getIsExchangeAxis,
+  getIsLegendYAxisShow,
 } from '../../utils/coordinate/rectCoor/handler'
 
 /**
@@ -31,6 +32,8 @@ export const merge = (
   } else {
     defaultOption.xAxis.data = getAxisList(userOption)
   }
+  // 检查XY轴翻转的情况
+  checkXYAxisOverTurn(userOption, chartInstance)
   // 检查自定义lengend
   checkCustomLegend(userOption, chartInstance)
   // 检查自定义颜色情况 (注意，这个函数的调用，必须放在checkCustomLegend后面)
@@ -158,6 +161,63 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
     set(userOption, 'color', customColor)
     set(userOption, 'bar.colorBy', 'data')
     set(userOption, 'bar.colorCategory', 'inherit')
+  }
+}
+
+const checkXYAxisOverTurn = (userOption: UserOption, chartInstance: any) => {
+  // TODO: 优化这一块的代码逻辑，现在写得及其的烂
+  // 如果是X轴和Y轴翻转的情况，此时应该根据数据去调整容器的高度
+  if ((get(userOption, 'yAxis.type') as any) === 'category') {
+    console.log('是翻转的柱状图')
+    const data = get(userOption, 'data')
+    const isStack = get(userOption, 'isStack')
+    const barWidth = (get(userOption, 'bar.barWidth') as unknown) as number
+    const _is2Array = is2Array(data as ObjectOf<any>[])
+    let length = _is2Array
+      ? isStack
+        ? get2ArrayStackBarLength(data as ObjectOf<any>[][])
+        : data.flat(2).length
+      : data.length
+    let unitBarSpace = 0
+    // TODO: 这里的逻辑都得优化
+    let BASE_UNIT_PER_LEGNTH = 36
+    if (length <= 8) {
+      if (length >= 7) {
+        BASE_UNIT_PER_LEGNTH = 52
+      } else if (length >= 6) {
+        BASE_UNIT_PER_LEGNTH = 60
+      } else if (length >= 5) {
+        BASE_UNIT_PER_LEGNTH = 72
+      } else if (length >= 2) {
+        BASE_UNIT_PER_LEGNTH = 80
+      } else {
+        BASE_UNIT_PER_LEGNTH = 140
+      }
+    }
+
+    // TODO: 这里的比例不会这么写，需要考虑到一个比率
+    if (barWidth) {
+      if (barWidth < 30) {
+        unitBarSpace = 4
+      } else if (barWidth >= 30 && barWidth < 60) {
+        unitBarSpace = 1.6
+      } else if (barWidth >= 60 && barWidth < 80) {
+        unitBarSpace = 0.9
+      } else if (barWidth >= 80 && barWidth < 100) {
+        unitBarSpace = 0.6
+      } else {
+        unitBarSpace = 0.1
+      }
+    }
+
+    const unitPerLength = barWidth
+      ? barWidth + unitBarSpace * barWidth
+      : BASE_UNIT_PER_LEGNTH
+
+    const height = length * unitPerLength
+    const { isTrue } = getIsLegendYAxisShow(userOption)
+
+    chartInstance.container.style.height = `${height + (isTrue ? 92 : 0)}px`
   }
 }
 

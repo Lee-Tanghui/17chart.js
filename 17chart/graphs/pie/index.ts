@@ -23,7 +23,7 @@ export default class Pie extends Graph {
     // 极坐标系统一处理
     polarCoorHandler(defaultOption, userOption, this)
     // 统一处理
-    handler(defaultOption, userOption)
+    handler(defaultOption, userOption, this)
     // 设置this.option
     this.option = defaultOption
   }

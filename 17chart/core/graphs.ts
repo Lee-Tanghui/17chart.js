@@ -3,12 +3,9 @@ import { ObjectOf } from '../types/general'
 import {
   getIsNeedRotate,
   getLabelMaxHeightByRotateXAxisLabel,
-  getIsLegendYAxisShow,
 } from '../utils/coordinate/rectCoor/handler'
-import { get2ArrayStackBarLength } from '../graphs/bar/merge'
 import { HEIGHT } from '../utils/constants'
 import get from '../utils/safe-get'
-import { is2Array } from '../utils/tools'
 import { checkIsValidData } from '../utils/validator'
 
 const CHART_SOURCE = '17-chart'
@@ -36,60 +33,6 @@ export default abstract class Graph {
     // 判断图表的高度(如果<=100px，那么将其给默认的高度360px)
     if (this.container.offsetHeight <= 100) {
       this.container.style.height = '360px'
-    }
-
-    // 如果是X轴和Y轴翻转的情况，此时应该根据数据去调整容器的高度
-    // TODO: 优化这一块的代码逻辑，现在写得及其的烂
-    if ((get(options, 'yAxis.type') as any) === 'category') {
-      const data = get(options, 'data')
-      const isStack = get(options, 'isStack')
-      const barWidth = (get(options, 'bar.barWidth') as unknown) as number
-      const _is2Array = is2Array(data as ObjectOf<any>[])
-      let length = _is2Array
-        ? isStack
-          ? get2ArrayStackBarLength(data as ObjectOf<any>[][])
-          : data.flat(2).length
-        : data.length
-      let unitBarSpace = 0
-      // TODO: 这里的逻辑都得优化
-      let BASE_UNIT_PER_LEGNTH = 36
-      if (length <= 8) {
-        if (length >= 7) {
-          BASE_UNIT_PER_LEGNTH = 52
-        } else if (length >= 6) {
-          BASE_UNIT_PER_LEGNTH = 60
-        } else if (length >= 5) {
-          BASE_UNIT_PER_LEGNTH = 72
-        } else if (length >= 2) {
-          BASE_UNIT_PER_LEGNTH = 80
-        } else {
-          BASE_UNIT_PER_LEGNTH = 140
-        }
-      }
-
-      // TODO: 这里的比例不会这么写，需要考虑到一个比率
-      if (barWidth) {
-        if (barWidth < 30) {
-          unitBarSpace = 4
-        } else if (barWidth >= 30 && barWidth < 60) {
-          unitBarSpace = 1.6
-        } else if (barWidth >= 60 && barWidth < 80) {
-          unitBarSpace = 0.9
-        } else if (barWidth >= 80 && barWidth < 100) {
-          unitBarSpace = 0.6
-        } else {
-          unitBarSpace = 0.1
-        }
-      }
-
-      const unitPerLength = barWidth
-        ? barWidth + unitBarSpace * barWidth
-        : BASE_UNIT_PER_LEGNTH
-
-      const height = length * unitPerLength
-      const { isTrue } = getIsLegendYAxisShow(options)
-
-      this.container.style.height = `${height + (isTrue ? 92 : 0)}px`
     }
 
     // 如果旋转X轴坐标名称，如果名称过程，需要增加容器的高度。否则会出现图表展现区域过小的情况
