@@ -24,6 +24,14 @@ export default abstract class Graph {
         ? (document.getElementById(container) as HTMLElement)
         : (container as HTMLElement)
 
+    // 移除可能存在的自定义图例
+    if (this.container.querySelector('#custom-legend')) {
+      const customLegend = this.container.querySelector(
+        '#custom-legend',
+      ) as HTMLElement
+      customLegend.parentElement?.removeChild(customLegend)
+    }
+
     // 参数检测
     this._validate(container, options)
 
@@ -65,13 +73,6 @@ export default abstract class Graph {
   }
 
   public render() {
-    // 移除可能存在的自定义图例
-    if (this.container.querySelector('#custom-legend')) {
-      const customLegend = this.container.querySelector(
-        '#custom-legend',
-      ) as HTMLElement
-      customLegend.parentElement?.removeChild(customLegend)
-    }
     // 如果有设置自定义高度（重置容器高度）
     if (get(this.option, 'height')) {
       const height = get(this.option, 'height')
