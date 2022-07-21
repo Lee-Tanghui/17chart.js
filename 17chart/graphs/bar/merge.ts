@@ -123,17 +123,17 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
     const colorCategory = get(userOption, 'bar.colorCategory')
     const color = get(userOption, 'color')
     if (color) {
-      console.error(
+      console.warn(
         'Invalid option: option.color is invalid when you set legend.custom',
       )
     }
     if (colorCategory) {
-      console.error(
+      console.warn(
         'Invalid option: bar.colorCategory is invalid when you set legend.custom',
       )
     }
     if ((get(userOption, 'bar.colorBy') as unknown) === 'data') {
-      console.error(
+      console.warn(
         'Invalid option: bar.colorBy is data is invalid when you set legend.custom ',
       )
     }
@@ -142,7 +142,7 @@ const checkCustomLegend = (userOption: UserOption, chartInstance: any) => {
       (userOption.legend as ObjectOf<any>).hasOwnProperty('right') ||
       (userOption.legend as ObjectOf<any>).hasOwnProperty('left')
     ) {
-      console.error(
+      console.warn(
         'Invalid option: grid.right or grid.left is not allowed when you set legend.custom',
       )
     }

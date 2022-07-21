@@ -65,6 +65,13 @@ export default abstract class Graph {
   }
 
   public render() {
+    // 移除可能存在的自定义图例
+    if (this.container.querySelector('#custom-legend')) {
+      const customLegend = this.container.querySelector(
+        '#custom-legend',
+      ) as HTMLElement
+      customLegend.parentElement?.removeChild(customLegend)
+    }
     // 如果有设置自定义高度（重置容器高度）
     if (get(this.option, 'height')) {
       const height = get(this.option, 'height')
@@ -84,11 +91,11 @@ export default abstract class Graph {
   }
 
   private _validate(container: string | HTMLElement, options: ObjectOf<any>) {
-    // 【参数检测错误】： container存在
+    // 【参数检测错误】： container不存在
     if (!container) {
       throw TypeError('argument of container is required')
     }
-    // 【参数错误检测】： 我是否
+    // 【参数错误检测】： options不存在
     if (!options) {
       throw TypeError('argument of option is required')
     }
@@ -100,7 +107,7 @@ export default abstract class Graph {
     if (typeof container !== 'string' && this.container.nodeType !== 1) {
       throw TypeError('Invalid Type: container is not a dom element')
     }
-    // 【参数错误检测】：options不是一个数组
+    // 【参数错误检测】：options.data不是一个数组的情况
     if (!checkIsValidData(get(options, 'data'))) {
       console.error('Invalid Type: options.data should be type of Array')
       return
