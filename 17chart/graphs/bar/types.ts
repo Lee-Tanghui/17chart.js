@@ -86,6 +86,7 @@ export interface UserOption {
   isShowLabel?: boolean
   isPercent?: boolean
   percentFixed?: number
+  isXYReverse?: boolean
   xAxis?: {
     type?: string
     name?: string

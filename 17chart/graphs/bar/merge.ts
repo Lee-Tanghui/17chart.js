@@ -25,6 +25,12 @@ export const merge = (
   userOption: UserOption,
   chartInstance: any,
 ) => {
+  // 判断是否具有X\Y转置的字段
+  if (get(userOption, 'isXYReverse')) {
+    set(userOption, 'yAxis.type', 'category')
+    set(userOption, 'xAxis.type', 'value')
+  }
+
   const isExchangeAxis = getIsExchangeAxis(userOption)
   // 挂载xAxis或yAxis的数据
   if (isExchangeAxis) {
@@ -168,7 +174,6 @@ const checkXYAxisOverTurn = (userOption: UserOption, chartInstance: any) => {
   // TODO: 优化这一块的代码逻辑，现在写得及其的烂
   // 如果是X轴和Y轴翻转的情况，此时应该根据数据去调整容器的高度
   if ((get(userOption, 'yAxis.type') as any) === 'category') {
-    console.log('是翻转的柱状图')
     const data = get(userOption, 'data')
     const isStack = get(userOption, 'isStack')
     const barWidth = (get(userOption, 'bar.barWidth') as unknown) as number

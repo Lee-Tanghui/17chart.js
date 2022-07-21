@@ -302,7 +302,7 @@ export default function BarPage() {
     })
 
     // 13-4. 堆叠柱状图 - 自定义label显示逻辑
-    const { option } = new $17chart.Bar('chart13-4', {
+    new $17chart.Bar('chart13-4', {
       data: data13_4,
       xField: 'value',
       yField: 'year',
@@ -334,7 +334,6 @@ export default function BarPage() {
         interval: 0.1,
       },
     })
-    console.log(option)
 
     // 14. 自定义图表高度
     new $17chart.Bar('chart14', {
@@ -358,21 +357,21 @@ export default function BarPage() {
       },
     })
 
-    // 15. 柱状图（X、Y轴翻转）
-    new $17chart.Bar('chart15', {
+    // 15. 柱状图（X、Y轴翻转）新增加
+    const ins = new $17chart.Bar('chart15', {
       renderer: 'svg',
       data: data5.slice(0, 10),
       xField: 'value', // x轴字段此时是value
       yField: 'name', // y轴字段此时是name
+      isXYReverse: true,
       yAxis: {
-        type: 'category', // 增加这个参数
         name: '学校名称',
       },
       xAxis: {
-        type: 'value', // 增加这个参数
         name: '参测人数',
       },
     })
+    console.log(ins)
 
     // 16. 柱状图（X、Y轴翻转，有百分比）
     new $17chart.Bar('chart16', {
@@ -616,6 +615,9 @@ export default function BarPage() {
       </section>
       <section>
         <h1>15. X、Y轴翻转的情况</h1>
+        <h3>
+          新增加了<code>isXYReverse</code>字段
+        </h3>
         <div id="chart15"></div>
       </section>
       <section>
