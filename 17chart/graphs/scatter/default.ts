@@ -25,8 +25,8 @@ export const getDefaultOption = (): ScatterDefaultOption => {
     color: COLOR.THEME_PRIMARY_COLORS,
     grid: {
       top: 30,
-      left: 0,
-      right: 40,
+      left: 12,
+      right: 20,
       bottom: 24,
       containLabel: true,
     },
@@ -59,6 +59,9 @@ export const getDefaultOption = (): ScatterDefaultOption => {
       },
       axisLabel: {
         color: '#999',
+      },
+      axisTick: {
+        show: false,
       },
       minInterval: 1,
       splitLine: {

@@ -28,7 +28,7 @@ export const getDefaultOption = (): BarDefaultOption => {
     grid: {
       top: 30,
       left: 0,
-      right: 40,
+      right: 24,
       bottom: 24,
       containLabel: true,
     },

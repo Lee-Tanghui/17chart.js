@@ -34,6 +34,8 @@ export default abstract class Graph {
 
     // 参数检测
     this._validate(container, options)
+    // 深拷贝options（避免后续更改用户的对象）
+    options = JSON.parse(JSON.stringify(options))
 
     // 设置标识
     this.container.setAttribute('chart-source', CHART_SOURCE)
@@ -107,6 +109,10 @@ export default abstract class Graph {
     // 【参数错误检测】：传递的不是id，但是不是一个DOM节点
     if (typeof container !== 'string' && this.container.nodeType !== 1) {
       throw TypeError('Invalid Type: container is not a dom element')
+    }
+    // 【参数错误检测】： options应该是一个对象
+    if (Object.prototype.toString.call(options) !== '[object Object]') {
+      throw TypeError('Invalid Type: options should be object')
     }
     // 【参数错误检测】：options.data不是一个数组的情况
     if (!checkIsValidData(get(options, 'data'))) {

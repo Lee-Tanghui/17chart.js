@@ -59,12 +59,22 @@ export const handler = (
 
   // 判断是否axis.name存在， 如果存在会影响grid.left和grid.right
   if (xAxis && xAxis.name) {
-    const extraWidth = getExtraWidth(xAxis.name, isPercent, 'right')
+    const extraWidth = getExtraWidth(
+      xAxis.name,
+      'right',
+      userOption,
+      defaultOption,
+    )
     setExtraGrid(defaultOption, GridEumType.RIGHT, extraWidth)
     defaultOption.grid.right = defaultOption.grid.right + extraWidth
   }
   if (yAxis && yAxis.name) {
-    const extraWidth = getExtraWidth(yAxis.name, isPercent, 'left')
+    const extraWidth = getExtraWidth(
+      yAxis.name,
+      'left',
+      userOption,
+      defaultOption,
+    )
     setExtraGrid(defaultOption, GridEumType.LEFT, extraWidth)
   }
 
@@ -146,7 +156,14 @@ export const getAxisList = (userOption: ObjectOf<any>): string[] => {
  * 也就是说X轴用来做数值，Y轴用来做分类（一般也就柱状图会使用）
  */
 export const getIsExchangeAxis = (userOption: ObjectOf<any>) => {
-  return (get(userOption, 'yAxis.type') as any) === 'category'
+  if (
+    (get(userOption, 'yAxis.type') as any) === 'category' ||
+    get(userOption, 'isXYReverse')
+  ) {
+    return true
+  } else {
+    return false
+  }
 }
 
 /**
@@ -227,15 +244,25 @@ export const getIsSetLegendPosition = (userOption: ObjectOf<any>): boolean => {
  */
 const getExtraWidth = (
   name: string,
-  isPercent: boolean,
   type: string,
+  userOption: ObjectOf<any>,
+  defaultOption: ObjectOf<any>,
 ): number => {
-  const percentUnitWidth = type === 'right' ? 6 : 8
-  const length = getStrLength(name)
-  if (length > 2) {
-    return (length - 2) * (isPercent ? percentUnitWidth : 16)
+  const UNIT_SIZE = 14
+  if (type === 'left') {
+    // 左侧的情况比较复杂
+    const defaultLeftGridValue = getDefaultLeftGridByYData(userOption)
+    const len = getStrLength(name) * UNIT_SIZE
+    console.log(defaultLeftGridValue, len)
+    if (defaultLeftGridValue > len) {
+      return 0
+    } else {
+      return len - defaultLeftGridValue
+    }
   } else {
-    return 0
+    const len = getStrLength(name) * UNIT_SIZE
+    console.log(defaultOption.grid.right)
+    return len - defaultOption.grid.right + (name.length <= 2 ? 6 : 0)
   }
 }
 
@@ -268,4 +295,60 @@ export const getMaxAxisLabel = (axisList: string[]): string => {
   })
 
   return maxStr
+}
+
+/**
+ * 获取默认左侧的grid的值
+ */
+export const getDefaultLeftGridByYData = (
+  userOption: ObjectOf<any>,
+): number => {
+  let left = 0
+  const { isPercent, yField, data } = userOption
+  const yMax = get(userOption, 'yAxis.max')
+
+  if (!data.length) {
+    return left
+  } else {
+    left = 12 // 如果有数据时，echarts会自动的设置数值和y轴之间的间距为12
+  }
+
+  const isXYReverse = getIsExchangeAxis(userOption)
+
+  let yList: any[] = []
+
+  if (is2Array(data)) {
+    data.forEach((arr: Array<any>) => {
+      arr.forEach((i: any) => {
+        yList.push(i[yField])
+      })
+    })
+  } else {
+    data.forEach((i: any) => {
+      yList.push(i[yField])
+    })
+  }
+
+  if (!isXYReverse) {
+    // 左侧是数值
+    let maxValue: number = Math.max(...yList)
+    let maxStr: string = (yMax ? yMax : maxValue).toString()
+
+    if (isPercent) {
+      maxStr += '%'
+    }
+    left += getStrLength(maxStr) * 12
+  } else {
+    // 左侧不是数值
+    let maxStr: string = ''
+    yList.forEach(name => {
+      if (name.length > maxStr.length) {
+        maxStr = name
+      }
+    })
+
+    left += getStrLength(maxStr) * 12
+  }
+
+  return left
 }

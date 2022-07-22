@@ -5,9 +5,12 @@ import { ObjectOf } from '../types/general'
  * @returns Boolean
  */
 export const is2Array = (array: any[]) => {
-  return array.every(i => {
-    return Array.isArray(i)
-  })
+  return (
+    array.length &&
+    array.every(i => {
+      return Array.isArray(i)
+    })
+  )
 }
 
 /**

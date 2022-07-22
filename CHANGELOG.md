@@ -1,3 +1,10 @@
+#### 0.0.24-alpha（2022-07-22）
+
+##### Optimize
+
+- 优化存在`xAxis.name`和`yAxis.name`时的grid.right和grid.left的算法
+
+
 #### 0.0.23-alpha（2022-07-22）
 
 ##### Feature
